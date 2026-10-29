@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    image: vikas-flask-backend:1.0
+    container_name: vikas-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    image: vikas-node-frontend:1.0
+    container_name: vikas-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
